@@ -42,7 +42,7 @@ let pokemonRepository = (function () {
   between the object key name and the user entry. Function will return array
   with object that matches user input, otherwise it returns an empty array.*/
   function pokeTest (var1){
-    return pokemonList.filter((nameCheck) => nameCheck.name === var1)
+    return pokemonList.filter((nameCheck) => nameCheck.name.toLowerCase() === var1.toLowerCase())
   }
 
   /*Funtion that returns pokemonList*/ 
