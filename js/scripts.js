@@ -1,23 +1,20 @@
 let pokemonRepository = (function () {
-  let pokemonList = [
-    {name: 'Bulbasaur', height: 0.7, type: ['grass','poison']},
-    {name: 'Charmander', height: 0.6, type: 'fire'},
-    {name: 'Squirtle', height: 0.5, type: 'water'}
-  ];
+  let pokemonList = [];
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   /*Function that checks validation of pokemon that are trying to be added to 
   pokemonList array. If the pokemon passed to function clears validation it
   is added to the array.*/ 
   function add(pokemon){
 
-    let obj1 = Object.keys(pokemon);
-    let obj2 = Object.keys(pokemonList[0]);
+    //let obj1 = Object.keys(pokemon);
+    //let obj2 = Object.keys(pokemonList[0]);
 
     /*Function that checks validation for pokemon added to pokemonList array. If 
     variables obj1 and obj2 have the same number of keys in each array and the characters
     of both arrays match when passed into strings, function returns true, otherwise the
     function returns false.*/ 
-    function isEqual(x, y){//validates user entry for pokemon
+    /*function isEqual(x, y){//validates user entry for pokemon
 
       if (x.length === y.length && x.toString() === y.toString()){//compares number of keys
         return true;
@@ -26,9 +23,9 @@ let pokemonRepository = (function () {
         alert('You have entered Invalid Information');
         return false;
       }
-    }
+    }*/
  
-    if (typeof(pokemon) === 'object' && isEqual(obj1, obj2) === true){
+    if (typeof pokemon === 'object' && "name" in pokemon){
       console.log('true');
       pokemonList.push(pokemon);
     }else {
@@ -68,7 +65,38 @@ let pokemonRepository = (function () {
   }
 
   function showDetails(pokemon){
-    console.log(pokemon);
+    loadDetails(pokemon).then(function (){
+      console.log(pokemon);
+    });
+  }
+
+  function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,//sets name as key
+          detailsUrl: item.url//set detailsUrl as key
+        };
+        add(pokemon);
+      });
+    }).catch(function (e) {
+        console.error(e);
+    })
+  }
+
+  function loadDetails(item){
+    let url =item.detailsUrl;
+    return fetch(url).then(function (response){
+      return response.json();
+    }).then(function (details){
+        item.imageUrl = details.sprites.front_default;
+        item.height = details.height;
+        item.types = details.types;
+    }).catch(function (e){
+        console.error(e);
+    });
   }
 
   return{
@@ -76,25 +104,28 @@ let pokemonRepository = (function () {
     getAll: getAll,
     pokeTest: pokeTest,
     addListItem: addListItem,
-    showDetails: showDetails
+    showDetails: showDetails,
+    loadList: loadList,
+    loadDetails: loadDetails
   };
 })();
 
-let item = {name: 'Pikachu', height: 1.05, type: 'electric'};
-pokemonRepository.add(item);
+//let item = {name: 'Pikachu', height: 1.05, type: 'electric'};
+//pokemonRepository.add(item);
 
-let userInput = prompt("What pokemon are you searching for?");
-let result = pokemonRepository.pokeTest(userInput);
+//let userInput = prompt("What pokemon are you searching for?");
+//let result = pokemonRepository.pokeTest(userInput);
 
-pokemonRepository.getAll().forEach(function (pokemon) {
-    pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function (){
+  pokemonRepository.getAll().forEach(function (pokemon) {
+      pokemonRepository.addListItem(pokemon);
   });
-
-if (result.length !== 0){
+})
+/*if (result.length !== 0){
   document.write(`<br>Here is your Pokemon: <br><br> ${result[0].name} (height: ${result[0].height})`);
 }else {
   document.write(`<br><br>${userInput} is an Invalid Entry!!!`);
-}
+}*/
 
 
 
