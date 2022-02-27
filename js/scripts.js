@@ -50,10 +50,33 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
+  function addListItem(pokemon){
+    let pokemonList = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('button-class');
+    listItem.appendChild(button);//append the button to the list item as its child
+    pokemonList.appendChild(listItem);//append the list item to the unordered list as its child
+    addClick(button, pokemon);
+  }
+
+  function addClick (button, pokemon){
+    button.addEventListener('click', () => {
+      showDetails(pokemon);
+    });
+  }
+
+  function showDetails(pokemon){
+    console.log(pokemon);
+  }
+
   return{
     add: add,
     getAll: getAll,
-    pokeTest: pokeTest
+    pokeTest: pokeTest,
+    addListItem: addListItem,
+    showDetails: showDetails
   };
 })();
 
@@ -63,13 +86,9 @@ pokemonRepository.add(item);
 let userInput = prompt("What pokemon are you searching for?");
 let result = pokemonRepository.pokeTest(userInput);
 
-pokemonRepository.getAll().forEach(function (pokemon){
-  if (pokemon.height > 0.6){
-    document.write(`${pokemon.name} (height: ${pokemon.height}) - Wow, that's big! <br><br>`);
-  }else {
-    document.write(`${pokemon.name} (height: ${pokemon.height})<br><br>`);
-  }
-});
+pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
 
 if (result.length !== 0){
   document.write(`<br>Here is your Pokemon: <br><br> ${result[0].name} (height: ${result[0].height})`);
