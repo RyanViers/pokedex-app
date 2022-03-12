@@ -35,32 +35,35 @@ let pokemonRepository = (function () {
   button and the pokemon object to the addClick() function.*/
   function addListItem(pokemon){
     let pokemonList = document.querySelector('.pokemon-list');
+
     let listItem = document.createElement('li');
+    listItem.classList.add('list-group-item','modal-background');
+    //listItem.classList.add('col-3');
+
     let button = document.createElement('button');
     button.innerText = pokemon.name;
-    button.classList.add('button-class');
+    button.classList.add('btn','button-class');
+    
+    
+    /* Adds the data toggle and data target to trigger the modal.*/
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#modal-container');
+
     listItem.appendChild(button);//append the button to the list item as its child
     pokemonList.appendChild(listItem);//append the list item to the unordered list as its child
-    addClick(button, pokemon);
-  }
 
-  /*Function adds a click listener event for each pokemon button and calls the
-  showDetails() fuction and sends the pokemon object as a parameter.*/
-  function addClick (button, pokemon){
     button.addEventListener('click', () => {
       showDetails(pokemon);
-    })
+    });
   }
-
-  /*Function loads the details from the individual pokemon object and send 
-  the object to the showModal() function.*/
+  
   function showDetails(pokemon){
     loadDetails(pokemon).then(function (){
       showModal(pokemon);
       console.log(pokemon);
     });
   }
-  
+
   /*Function loads API data for each pokemon object into pokemonList array.*/
   function loadList() {
     return fetch(apiUrl).then(function (response) {
@@ -84,9 +87,18 @@ let pokemonRepository = (function () {
     return fetch(url).then(function (response){
       return response.json();
     }).then(function (details){
-        pokemon.imageUrl = details.sprites.front_default;
+        pokemon.imageUrlFront = details.sprites.front_default;
+        pokemon.imageUrlBack = details.sprites.back_default;
         pokemon.height = details.height;
-        pokemon.types = details.types;
+        pokemon.weight = details.weight;
+        pokemon.types = [];
+        details.types.forEach(element => {
+          pokemon.types.push(element.type.name);
+        })
+        pokemon.abilities = [];
+        details.abilities.forEach(element => {
+          pokemon.abilities.push(element.ability.name);
+        })
     }).catch(function (e){
         console.error(e);
     });
@@ -94,54 +106,37 @@ let pokemonRepository = (function () {
 
   /*Function creates modal for each individual pokemon when user clicks on individual pokemon button.*/
   function showModal(pokemon){
-    modalContainer.innerHTML = '';//Clear all exsisting modal content.
+    let modalTitle = $('.modal-title');
+    let modalBody = $('.modal-body');
+    let modalFooter = $('.modal-footer');
 
-    /*Creates modal.*/
-    let modal = document.createElement('div');
-    modal.classList.add('modal');
+    modalTitle.empty();
+    modalBody.empty();
+    modalFooter.empty();
 
-    /*Creates close button inside of modal.*/
-    let closeButtonElement = document.createElement('button');
-    closeButtonElement.classList.add('modal-close');
-    closeButtonElement.innerText = 'Close';
-    closeButtonElement.addEventListener('click', hideModal);
+    let nameElement = $(`<h1>${pokemon.name}</h1>`);
 
-    /*Creates title element for pokemon name inside of modal.*/
-    let titleElement = document.createElement('h1');
-    let pokeName = pokemon.name;
-    titleElement.innerText = 'Pokemon Name: ' + pokeName;
+    let imageElementFront = $('<img class="modal-image" style="width:50%">');
+    imageElementFront.attr('src', pokemon.imageUrlFront);
 
-    /*Creates height element for pokemon inside of modal.*/
-    let contentElement = document.createElement('p');
-    let pokeHeight = pokemon.height;
-    contentElement.innerText = 'Pokemon Height: ' + pokeHeight + ' (meters)';
+    let imageElementBack = $('<img class="modal-image" style="width:50%">');
+    imageElementBack.attr('src', pokemon.imageUrlBack);
 
-    /*Creates types element for pokemon and checks to see if more than 1 type is present.*/
-    let typeElement = document.createElement('p');
-    let pokeTypes = pokemon.types;
-    let pokeTypesList = pokemon.types[0].type.name;
-    for(let i = 1; i < pokeTypes.length; i++){
-      let secondType = pokeTypes[i].type.name;
-      pokeTypesList += ', ' + secondType;
-    }
-    let formatType = pokeTypes.length < 2 ? "Type: " : "Types: ";
-    typeElement.innerText = formatType + pokeTypesList;
+    let heightElement = $(`<p><br>Height: ${pokemon.height}</p><br>`);
 
-    /*Creates image element for pokemon inside of the modal.*/
-    let imageElement = document.createElement('img');
-    imageElement.classList.add('modal-image');
-    let pokeImage = pokemon.imageUrl;
-    imageElement.src = pokeImage;
+    let weightElement = $(`<p>Weight: ${pokemon.weight}</p><br>`);
 
-    /*Adds all the elements to the modal then adds modal to modal-container in the index.html file.*/
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(titleElement);
-    modal.appendChild(contentElement);
-    modal.appendChild(typeElement);
-    modal.appendChild(imageElement);
-    modalContainer.appendChild(modal);
-  
-    modalContainer.classList.add('is-visible');
+    let typeElement = $(`<p>Types: ${pokemon.types}</p><br>`);
+
+    let abilitiesElement = $(`<p>Abilities: ${pokemon.abilities}</p>`);
+
+    modalTitle.append(nameElement);
+    modalBody.append(imageElementFront);
+    modalBody.append(imageElementBack);
+    modalBody.append(heightElement);
+    modalBody.append(weightElement);
+    modalBody.append(typeElement);
+    modalBody.append(abilitiesElement);
   }
   
   /*This function removes is-visible class making the modal disapear.*/
@@ -157,36 +152,28 @@ let pokemonRepository = (function () {
   /*Function that shows a input dialog that ask for the pokemon
   name that user is searching for.*/
   function showDialog(){
-    modalContainer.innerHTML = '';
-    let modal = document.createElement('div');
-    modal.classList.add('modal');
+    let modalTitle = $('.modal-title');
+    let modalBody = $('.modal-body');
+    let modalFooter = $('.modal-footer');
 
-    let searchQuestion = document.createElement('h1');
-    searchQuestion.innerText = 'Type Pokemon Name In Search Bar: ';
+    modalTitle.empty();
+    modalBody.empty();
+    modalFooter.empty();  
 
-    let userInput = document.createElement('input');
-    userInput.classList.add('.input');
+    let searchQuestion = $(`<h1>Type Pokemon Name In Search Bar: </h1>`);
 
-    let confirmButton = document.createElement('button');
-    confirmButton.classList.add('modal-confirm');
-    confirmButton.innerText = 'Confirm';
+    let userInput = $('<input type="text" class="form-control">');
 
-    let cancelButton = document.createElement('button');
-    cancelButton.classList.add('modal-cancel');
-    cancelButton.innerText = 'Cancel';
+    let confirmButton = $('<button>Confirm</button>');
 
-    modal.appendChild(searchQuestion);
-    modal.appendChild(userInput);
-    modal.appendChild(confirmButton);
-    modal.appendChild(cancelButton);
-    modalContainer.appendChild(modal);
-    modalContainer.classList.add('is-visible');
+    modalTitle.append(searchQuestion);
+    modalBody.append(userInput);
+    modalFooter.append(confirmButton);
     confirmButton.focus();//Focus the confirmButton so that the user can simply press Enter.
 
     return new Promise((resolve, reject) => {
-      cancelButton.addEventListener('click', hideModal);
-      confirmButton.addEventListener('click', () => {
-        let pokeCheck = pokeTest(userInput.value);
+      confirmButton.on('click', () => {
+        let pokeCheck = pokeTest(userInput.val());
         if(pokeCheck.length === 0){
           console.log('error');
           alert('You Have Entered Invalid Information!');
@@ -203,11 +190,16 @@ let pokemonRepository = (function () {
   /*Function that puts a search button in the h1 element that
   opens the showDialog() modal when pressed.*/
   function searchPokemon () {
-    let modal = document.querySelector('h1')
-    let searchButton = document.createElement('button');
-    searchButton.classList.add('h1-button');
-    searchButton.innerText = "Search";
-    modal.appendChild(searchButton);
+    let searchButton = document.querySelector('#searchButton');
+    //let searchButton = document.createElement('button');
+    //searchButton.classList.add('h1-button');
+    //searchButton.innerText = "Search";
+
+    /* Adds the data toggle and data target to trigger the modal.*/
+    searchButton.setAttribute('data-toggle', 'modal');
+    searchButton.setAttribute('data-target', '#modal-container');
+
+    //modal.appendChild(searchButton);
     searchButton.addEventListener('click', () => {
       showDialog();
     });
@@ -235,7 +227,6 @@ let pokemonRepository = (function () {
     getAll: getAll,
     pokeTest: pokeTest,
     addListItem: addListItem,
-    showDetails: showDetails,
     loadList: loadList,
     loadDetails: loadDetails,
     searchPokemon: searchPokemon
