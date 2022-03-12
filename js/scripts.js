@@ -1,68 +1,8 @@
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-  let modalContainer = document.querySelector('#modal-container');
   let dialogPromiseReject;
   searchPokemon();
-
-  /*Function that checks validation of pokemon that are trying to be added to 
-  pokemonList array. If the pokemon passed to function clears validation it
-  is added to the array.*/ 
-  function add(pokemon){
-    if (typeof pokemon === 'object' && "name" in pokemon){
-      console.log('true');
-      pokemonList.push(pokemon);
-    }else {
-      console.log(pokemon);
-      alert('You have entered Invalid Information');
-      console.log("error");
-    }
-  }
-  
-  /*Funtion that filters through pokemonList objects until a match is made
-  between the object key name and the user entry. Function will return array
-  with object that matches user input, otherwise it returns an empty array.*/
-  function pokeTest (var1){
-    return pokemonList.filter((nameCheck) => nameCheck.name.toLowerCase() === var1.toLowerCase());
-  }
-
-  /*Funtion that returns pokemonList*/ 
-  function getAll(){
-    return pokemonList;
-  }
-
-  /*Function adds button for list item of each pokemon object, and sends the
-  button and the pokemon object to the addClick() function.*/
-  function addListItem(pokemon){
-    let pokemonList = document.querySelector('.pokemon-list');
-
-    let listItem = document.createElement('li');
-    listItem.classList.add('list-group-item','modal-background');
-    //listItem.classList.add('col-3');
-
-    let button = document.createElement('button');
-    button.innerText = pokemon.name;
-    button.classList.add('btn','button-class');
-    
-    
-    /* Adds the data toggle and data target to trigger the modal.*/
-    button.setAttribute('data-toggle', 'modal');
-    button.setAttribute('data-target', '#modal-container');
-
-    listItem.appendChild(button);//append the button to the list item as its child
-    pokemonList.appendChild(listItem);//append the list item to the unordered list as its child
-
-    button.addEventListener('click', () => {
-      showDetails(pokemon);
-    });
-  }
-  
-  function showDetails(pokemon){
-    loadDetails(pokemon).then(function (){
-      showModal(pokemon);
-      console.log(pokemon);
-    });
-  }
 
   /*Function loads API data for each pokemon object into pokemonList array.*/
   function loadList() {
@@ -79,6 +19,50 @@ let pokemonRepository = (function () {
     }).catch(function (e) {
         console.error(e);
     })
+  }
+
+  /*Function that checks validation of pokemon that are trying to be added to 
+  pokemonList array. If the pokemon passed to function clears validation it
+  is added to the array.*/ 
+  function add(pokemon){
+    if (typeof pokemon === 'object' && "name" in pokemon){
+      console.log('true');
+      pokemonList.push(pokemon);
+    }else {
+      console.log(pokemon);
+      alert('You have entered Invalid Information');
+      console.log("error");
+    }
+  }
+
+  /*Funtion that returns pokemonList*/ 
+  function getAll(){
+    return pokemonList;
+  }
+
+  /*Function adds button for list item of each pokemon object, and sends the
+  button and the pokemon object to the addClick() function.*/
+  function addListItem(pokemon){
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('btn', 'btn-primary', 'button-class');
+    
+    /* Adds the data toggle and data target to trigger the modal.*/
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#modal-container');
+
+    document.querySelector('#pokeList').appendChild(button);
+
+    button.addEventListener('click', () => {
+      showDetails(pokemon);
+    });
+  }
+  
+  function showDetails(pokemon){
+    loadDetails(pokemon).then(function (){
+      showModal(pokemon);
+      console.log(pokemon);
+    });
   }
 
   /*Function sets keywords to use for each individual pokemon that are passed into function.*/
@@ -139,16 +123,20 @@ let pokemonRepository = (function () {
     modalBody.append(abilitiesElement);
   }
   
-  /*This function removes is-visible class making the modal disapear.*/
-  function hideModal(){
-    modalContainer.classList.remove('is-visible');
+  /*Function that puts a search button in the h1 element that
+  opens the showDialog() modal when pressed.*/
+  function searchPokemon () {
+    let searchButton = document.querySelector('#searchButton');
 
-    if(dialogPromiseReject){
-      //dialogPromiseReject();
-      dialogPromiseReject = null;
-    }
+    /* Adds the data toggle and data target to trigger the modal.*/
+    searchButton.setAttribute('data-toggle', 'modal');
+    searchButton.setAttribute('data-target', '#modal-container');
+
+    searchButton.addEventListener('click', () => {
+      showDialog();
+    });
   }
-  
+
   /*Function that shows a input dialog that ask for the pokemon
   name that user is searching for.*/
   function showDialog(){
@@ -164,7 +152,7 @@ let pokemonRepository = (function () {
 
     let userInput = $('<input type="text" class="form-control">');
 
-    let confirmButton = $('<button>Confirm</button>');
+    let confirmButton = $('<button class="btn btn-primary">Confirm</button>');
 
     modalTitle.append(searchQuestion);
     modalBody.append(userInput);
@@ -180,47 +168,18 @@ let pokemonRepository = (function () {
         }else {
           showDetails(pokeCheck[0]);
         }
-        hideModal();
         resolve();
       });
       dialogPromiseReject = reject;
     });
   }
 
-  /*Function that puts a search button in the h1 element that
-  opens the showDialog() modal when pressed.*/
-  function searchPokemon () {
-    let searchButton = document.querySelector('#searchButton');
-    //let searchButton = document.createElement('button');
-    //searchButton.classList.add('h1-button');
-    //searchButton.innerText = "Search";
-
-    /* Adds the data toggle and data target to trigger the modal.*/
-    searchButton.setAttribute('data-toggle', 'modal');
-    searchButton.setAttribute('data-target', '#modal-container');
-
-    //modal.appendChild(searchButton);
-    searchButton.addEventListener('click', () => {
-      showDialog();
-    });
+  /*Funtion that filters through pokemonList objects until a match is made
+  between the object key name and the user entry. Function will return array
+  with object that matches user input, otherwise it returns an empty array.*/
+  function pokeTest (var1){
+    return pokemonList.filter((nameCheck) => nameCheck.name.toLowerCase() === var1.toLowerCase());
   }
-
-  /*Calls the hideModal() function to remove modal if user pushers Escape on keyboard.*/
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-      hideModal();  
-    }
-  });
-  
-  /*Calls the hideModal() fuction to remove modal if user clicks mouse outside of modal.
-  Designed to only remove modal if pointer is clicked directly on modal-container overlay
-  and not inside the modal itself.*/
-  modalContainer.addEventListener('click', (e) => {
-    let target = e.target;
-    if (target === modalContainer) {
-      hideModal();
-    }
-  });
 
   return{
     add: add,
