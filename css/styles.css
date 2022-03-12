@@ -4,19 +4,21 @@ body{
 
 .pokemon-list{
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto;
   text-align: center;
   list-style-type: none;
   margin-top: 220px;
+  margin-bottom: 100px;
+  
 }
 
 .button-class{ 
   width: 150px;
   height: 50px;
+  font-weight: bold;
   background-color: lightgrey;
   color: black;
   font-size: justify;
-  box-shadow: inset 0 0 0 0 lightblue;
   transition: ease-out 0.4s;
   margin: 8px 4px;
   border-radius: 50px;
@@ -26,23 +28,34 @@ body{
 
 .button-class:hover,
  .button-class:active {
-  box-shadow: inset 500px 0 0 0 lightblue;
-  transition: ease-in 0.4s;
-  cursor: pointer;/* lets the mouse appear as a hand when hovering over the button */
-  color: beige;
   transform: scale(0.95);/* Scaling button to 0.95 to its original size */
 }
 
 h1{
   display: inline-block;
-  /*text-align: center;*/
-  
   font-size: 100px;
   margin-top: 25px;
   margin-bottom: 0px;
   border: 5px solid black;
   background-color: rgb(223, 245, 252);
   
+}
+
+.modal-container {
+  position: center;
+  padding: 20px;
+  box-sizing: border-box;
+  top: 25%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;/* to show it above other content */
+  overflow: auto; /* to allow scrolling if the screen is not high enough*/
+}
+
+.modal-body {
+  border-bottom: 5px solid black;
+  border-top: 5px solid black;
 }
 
 .modal h1 {
@@ -52,14 +65,14 @@ h1{
   margin-right: auto;
   text-align: left;
   font-size: 30px;
-  border: 1px solid black;
   background-color: lightgray;
   text-transform: capitalize;
   padding: 10px;
-}*/
+}
 
 .modal p {
   margin-bottom: 0;
+  font-weight: bold;
   text-transform: capitalize;
 }
 
@@ -87,8 +100,23 @@ h1{
   background-color: rgb(194, 173, 194);
 }
 
-.modal-background {
-  background-color: lavender;
+.modal-header {
+  background-color: darkslategray;
+}
+
+.modal-footer {
+  display: block;
+  background-color: darkslategrey;
+}
+
+.list-background {
+  background-color: rgb(74, 74, 187);
+  border: 5px solid black;
+}
+
+.modal-background{
+  background-color: skyblue;
+  border: 5px solid black;
 }
 
 .logo-size {
