@@ -3,19 +3,19 @@ body{
 }
 
 .pokemon-list{
+  display: grid;
+  grid-template-columns: auto auto auto;
   text-align: center;
-  display: block;
   list-style-type: none;
-  background-color: beige;
-  border: 5px solid black;
+  margin-top: 220px;
 }
 
-.button-class{
-  width: 500px;
+.button-class{ 
+  width: 150px;
+  height: 50px;
   background-color: lightgrey;
   color: black;
-  padding: 16px 32px;
-  font-size: 50px;
+  font-size: justify;
   box-shadow: inset 0 0 0 0 lightblue;
   transition: ease-out 0.4s;
   margin: 8px 4px;
@@ -34,57 +34,20 @@ body{
 }
 
 h1{
-  text-align: center;
+  display: inline-block;
+  /*text-align: center;*/
+  
   font-size: 100px;
+  margin-top: 25px;
+  margin-bottom: 0px;
   border: 5px solid black;
   background-color: rgb(223, 245, 252);
-}
-
-#modal-container {
-  display: none;
-}
-
-#modal-container.is-visible {
-  position: fixed;
-  padding: 20px;
-  box-sizing: border-box;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;/* to show it above other content */
-  overflow: auto; /* to allow scrolling if the screen is not high enough*/
-  /* this is used to center the modal */
-  display: grid;
-  text-align: center;
-}
-
-.modal {
-  margin: auto;
-  display: inline-block;
-  box-sizing: border-box;
-  background: lightblue;
-  padding: 15px;
-  width: 100%;
-  max-width: 700px;
-  text-align: left;
-  border: 5px solid black;
-}
-
-.modal-close {
-  float: right;
-  -webkit-appearance: none;
-  border: 1px solid black;
-  background: lightgrey;
-  color: black;
-  text-decoration: underline;
-  cursor: pointer;
+  
 }
 
 .modal h1 {
   display: inline-block;
-  margin-top: 0;
+  margin-bottom: 0px;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
@@ -93,7 +56,7 @@ h1{
   background-color: lightgray;
   text-transform: capitalize;
   padding: 10px;
-}
+}*/
 
 .modal p {
   margin-bottom: 0;
@@ -101,7 +64,7 @@ h1{
 }
 
 .modal-image {
-  display: block;
+  display: inline;
   margin-left: auto;
   margin-right: auto;
   background-color: lightgray;
@@ -112,8 +75,9 @@ h1{
 
 .h1-button {
   display: inline;
-  float: left;
-  margin-top: 128px;
+  float: right;
+  margin-top: 30px;
+  margin-left: 25px;
   padding: 15px 32px;
   font-size: 16px;
   font-weight: 700;
@@ -121,4 +85,20 @@ h1{
   border: 2px solid black;
   text-align: center;
   background-color: rgb(194, 173, 194);
+}
+
+.modal-background {
+  background-color: lavender;
+}
+
+.logo-size {
+  display: inline-flex;
+  float: left;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  padding-left: 10px;
+  margin-bottom: 0px;
+  margin-top: 0px
 }
