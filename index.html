@@ -9,43 +9,42 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <title>Pokedex App</title>
   </head>
+
   <body>
+    <header>
+      <!-- Navbar -->
+      <nav class="navbar navbar-light bg-dark fixed-top">
+        <a class="navbar-brand" href="index.html">
+          <img src="./img/pokeball.jpg" class="logo-size" alt="Pokeball" class="logo">
+          <h1>Pokedex</h1>
+        </a>
+        <button class="btn btn-primary" id="searchButton">Search</button>
+      </nav>
+    </header>
+
     <main>
-      <header>
-        <nav class="navbar navbar-light bg-dark fixed-top">
-          <a class="navbar-brand" href="index.html">
-            <img src="./img/pokeball.jpg" class='logo-size' alt="Pokeball" class="logo">
-            <h1>Pokedex</h1>
-          </a>
-          <button class="h1-button" id="searchButton">Search</button>
-          <div class="container-fluid">
+      <!-- Pokemon List-->
+      <ul class="pokemon-list list-group container">
+        <li class="list-group-item list-background" id="pokeList"></li>
+      </ul>
 
-            
-            <!--<h1 class="navbar-text">Pokedex</h1>-->
-          </div>
-        </nav>
-        <ul class='pokemon-list container list-group'></ul>
-
-        <!-- Modal -->
-        <!--<div id='modal-container'></div>-->
-        <div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-labelledby="pokemonModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content modal-background">
-              <div class="modal-header">
-                <h5 class="modal-title" id="pokemonModelLabel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body"></div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
+      <!-- Modal -->
+      <div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-labelledby="pokemonModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-container" role="document">
+          <div class="modal-content modal-background">
+            <div class="modal-header">
+              <h5 class="modal-title" id="pokemonModelLabel"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer"></div>
           </div>
         </div>
-      </header>
+      </div>
     </main>
+
     <strong>
       <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
