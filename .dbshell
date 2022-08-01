@@ -1,0 +1,124 @@
+show dbs
+esit
+use myFlixDB
+db.getCollectionNames()
+db.createCollection("movies")
+var movie1 = { Title: "Silence of the Lambs", Description: "A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.", Genre: { Name: "Thriller", Description: "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience." }, Director: { Name: "Jonathan Demme", Bio: "Robert Jonathan Demme was an American director, producer, and screenwriter.", Birth: "1944", Death: "2017" }, ImagePath: "silenceofthelambs.png", Featured: true }
+db.movies.insertOne(movie1)
+db
+show dbs
+db
+db.getCollectionNames()
+db.movies.find()
+db.movies.find().pretty()
+db.movies.update( {_id: ObjectId("624a07457635ae5fa9d968e2")}, {$set: {Description: "A young FBI cadet must recive the help of an incarcerated and manipulative cannibal killer."}} )
+db.movies.find()
+db.movies.find().pretty()
+db
+use myFlixDB
+db
+db.movies.find().pretty()
+db
+use movies
+db.getCollectionNames()
+use myFlixDB
+db.getCollectionNames()
+us myFlixDB\
+use myFlixDB
+db
+show dbs
+db.getCollectionNames()
+db.movies.find().pretty()
+use myFlixDb
+use myFlixDB
+db.movies.find().pretty()
+var movie2 = {  Title: "Star Wars: A New Hope",  Description: "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire\'s world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",  Genre: {  Name: "Science Fiction",  Description: "Science fiction movies take viewers into a world of amazing and futuristic technology, where space travelers roam innumerable universes, aliens live amongst us, and almost anything is possible. From mad scientists creating new life forms to brave explorers conquering time travel or outer space, science fiction pushes the boundaries of what is possible or what might be possible in the future."  },  Director: {  Name: "George Lucas",  Bio: "George Walton Lucas Jr. is an American film director, producer, screenwriter, and entrepreneur. Lucas is best known for creating the Star Wars and Indiana Jones franchises and founding Lucasfilm, LucasArts, and Industrial Light & Magic.",  Birth: "1944",  Death: "-"  },  ImagePath: "https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",  Featured: true  }
+db.movies.insertOne(movie2)
+db.movies.find().pretty()
+var movie3 = {  Title: "Star Wars: The Empire Stikes Back",  Description: "After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda, while his friends are pursued across the galaxy by Darth Vader and bounty hunter Boba Fett.",  Genre: {  Name: "Science Fiction",  Description: "Science fiction movies take viewers into a world of amazing and futuristic technology, where space travelers roam innumerable universes, aliens live amongst us, and almost anything is possible. From mad scientists creating new life forms to brave explorers conquering time travel or outer space, science fiction pushes the boundaries of what is possible or what might be possible in the future."  },  Director: {  Name: "George Lucas",  Bio: "George Walton Lucas Jr. is an American film director, producer, screenwriter, and entrepreneur. Lucas is best known for creating the Star Wars and Indiana Jones franchises and founding Lucasfilm, LucasArts, and Industrial Light & Magic.",  Birth: "1944",  Death: "-"  },  ImagePath: "https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg",  Featured: true  }
+db.movies.insertOne(movie3)
+db.movies.find().pretty()
+var movie4 = {  Title: "Star Wars: Return Of The Jedi",  Description: "After a daring mission to rescue Han Solo from Jabba the Hutt, the Rebels dispatch to Endor to destroy the second Death Star. Meanwhile, Luke struggles to help Darth Vader back from the dark side without falling into the Emperor\'s trap.",  Genre: {  Name: "Science Fiction",  Description: "Science fiction movies take viewers into a world of amazing and futuristic technology, where space travelers roam innumerable universes, aliens live amongst us, and almost anything is possible. From mad scientists creating new life forms to brave explorers conquering time travel or outer space, science fiction pushes the boundaries of what is possible or what might be possible in the future."  },  Director: {  Name: "George Lucas",  Bio: "George Walton Lucas Jr. is an American film director, producer, screenwriter, and entrepreneur. Lucas is best known for creating the Star Wars and Indiana Jones franchises and founding Lucasfilm, LucasArts, and Industrial Light & Magic.",  Birth: "1944",  Death: "-"  },  ImagePath: "https://m.media-amazon.com/images/M/MV5BOWZlMjFiYzgtMTUzNC00Y2IzLTk1NTMtZmNhMTczNTk0ODk1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_FMjpg_UX1000_.jpg",  Featured: true  }
+db.movies.insertOne(movie4)
+db.movies.find().pretty()
+var movie5 = {  Title: "Night Of The Living Dead",  Description: "A ragtag group of Pennsylvanians barricade themselves in an old farmhouse to remain safe from a horde of flesh-eating ghouls that are ravaging the East Coast of the United States.",  Genre: {  Name: "Horror",  Description: "Horror movies are intended to frighten and thrill audiences, using a number of different techniques. From gory slasher films to disturbing psychological thrillers, horror movies play on fears and edge-of-your-seat drama. You\'ll find many themes in these movies including monsters, the paranormal, serial killers, and the occult. "  },  Director: {  Name: "George A. Romero",  Bio: "George Andrew Romero was an American-Canadian filmmaker, writer, and editor. His Night of the Living Dead series of films about an imagined zombie apocalypse began with the 1968 film of the same name, and is often considered a major contributor to the image of the zombie in modern culture.",  Birth: "1940",  Death: "2017"  },  ImagePath: "https://m.media-amazon.com/images/M/MV5BMzRmN2E1ZDUtZDc2ZC00ZmI3LTkwOTctNzE2ZDIzMGJiMTYzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg",  Featured: true  }
+db.movies.insertOne(movie5)
+var movie6 = {  Title: "Dawn OF The Dead",  Description: "Following an ever-growing epidemic of zombies that have risen from the dead, two Philadelphia S.W.A.T. team members, a traffic reporter, and his television executive girlfriend seek refuge in a secluded shopping mall..",  Genre: {  Name: "Horror",  Description: "Horror movies are intended to frighten and thrill audiences, using a number of different techniques. From gory slasher films to disturbing psychological thrillers, horror movies play on fears and edge-of-your-seat drama. You\'ll find many themes in these movies including monsters, the paranormal, serial killers, and the occult. "  },  Director: {  Name: "George A. Romero",  Bio: "George Andrew Romero was an American-Canadian filmmaker, writer, and editor. His Night of the Living Dead series of films about an imagined zombie apocalypse began with the 1968 film of the same name, and is often considered a major contributor to the image of the zombie in modern culture.",  Birth: "1940",  Death: "2017"  },  ImagePath: "https://m.media-amazon.com/images/M/MV5BMzc1YTIyNjctYzhlNy00ZmYzLWI2ZWQtMzk4MmQwYzA0NGQ1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg",  Featured: true  }
+db.movies.insertOne(movie6)
+var movie7 = {  Title: "Day OF The Dead",  Description: "As the world is overrun by zombies, a small group of scientists and military personnel dwelling in an underground bunker in Florida must determine whether they should educate, eliminate or escape the undead horde.",  Genre: {  Name: "Horror",  Description: "Horror movies are intended to frighten and thrill audiences, using a number of different techniques. From gory slasher films to disturbing psychological thrillers, horror movies play on fears and edge-of-your-seat drama. You\'ll find many themes in these movies including monsters, the paranormal, serial killers, and the occult. "  },  Director: {  Name: "George A. Romero",  Bio: "George Andrew Romero was an American-Canadian filmmaker, writer, and editor. His Night of the Living Dead series of films about an imagined zombie apocalypse began with the 1968 film of the same name, and is often considered a major contributor to the image of the zombie in modern culture.",  Birth: "1940",  Death: "2017"  },  ImagePath: "https://m.media-amazon.com/images/M/MV5BNWVmMzlhZGYtMWRiOS00MGIwLTk5YTAtZGE4OTcyYjU3YzZmXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg",  Featured: true  }
+db.movies.insertOne(movie7)
+db.movies.find().pretty()
+var movie8 = {  Title: "Blazing Saddles",  Description: "In order to ruin a western town, a corrupt politician appoints a black Sheriff, who promptly becomes his most formidable adversary.",  Genre: {  Name: "Comedy",  Description: "Any movie that is designed to make people laugh falls under the comedy umbrella. Whether it\'s an animated movie suitable for the whole family or a bawdy adult film, if it\'s meant to be funny, it\'s a comedy. There are many sub-genres of comedy, including romantic comedies, physical or slapstick comedy, and dark comedy. In this genre the plot is usually light, with the focus on the actors and their ability to amuse their audiences."  },  Director: {  Name: "Mel Brooks",  Bio: "Mel Brooks is an American actor, comedian and filmmaker. With a career spanning over seven decades, he is known as a creator of broad farces and parodies widely considered to be among the best film comedies ever made.",  Birth: "1926",  Death: "-"  },  ImagePath: "https://m.media-amazon.com/images/M/MV5BZGZmMWE1MDYtNzAyNC00MDMzLTgzZjQtNTQ5NjYzN2E4MzkzXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_FMjpg_UX1000_.jpg",  Featured: true  }
+db.movies.insertOne(movie8)
+var movie9 = {  Title: "Spaceballs",  Description: "A star-pilot for hire and his trusty sidekick must come to the rescue of a princess and save Planet Druidia from the clutches of the evil Spaceballs.",  Genre: {  Name: "Comedy",  Description: "Any movie that is designed to make people laugh falls under the comedy umbrella. Whether it\'s an animated movie suitable for the whole family or a bawdy adult film, if it\'s meant to be funny, it\'s a comedy. There are many sub-genres of comedy, including romantic comedies, physical or slapstick comedy, and dark comedy. In this genre the plot is usually light, with the focus on the actors and their ability to amuse their audiences."  },  Director: {  Name: "Mel Brooks",  Bio: "Mel Brooks is an American actor, comedian and filmmaker. With a career spanning over seven decades, he is known as a creator of broad farces and parodies widely considered to be among the best film comedies ever made.",  Birth: "1926",  Death: "-"  },  ImagePath: "https://m.media-amazon.com/images/M/MV5BMTBlNGE0N2EtZDA2OS00OTA3LWFiYjUtODI0YzFmODY3NDExXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_FMjpg_UX1000_.jpg",  Featured: true  }
+db.movies.insertOne(movie9)
+db.movies.find().pretty()
+var movie10 = {  Title: "Robin Hood: Men In Tights",  Description: "A spoof of Robin Hood in general, and Robin Hood: Prince of Thieves (1991) in particular.",  Genre: {  Name: "Comedy",  Description: "Any movie that is designed to make people laugh falls under the comedy umbrella. Whether it\'s an animated movie suitable for the whole family or a bawdy adult film, if it\'s meant to be funny, it\'s a comedy. There are many sub-genres of comedy, including romantic comedies, physical or slapstick comedy, and dark comedy. In this genre the plot is usually light, with the focus on the actors and their ability to amuse their audiences."  },  Director: {  Name: "Mel Brooks",  Bio: "Mel Brooks is an American actor, comedian and filmmaker. With a career spanning over seven decades, he is known as a creator of broad farces and parodies widely considered to be among the best film comedies ever made.",  Birth: "1926",  Death: "-"  },  ImagePath: "https://m.media-amazon.com/images/M/MV5BZGYyNmU2NmEtNGU1ZS00YjFkLWI0MWQtZjU2MmUxZDAyN2UxXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg",  Featured: true  }
+db.movies.insertOne(movie10)
+db.movies.find().pretty()
+var user1 = {  Username: "BiggestDude",  Password: "1234",  Email: "BiggestDude@gmail.com",  Birthday: new Date("1980-01-01"),  FavoriteMovies: [],  }
+db.users.insertOne(user1)
+db.users.find().pretty()
+var user2 {  Username: "BigDude",  Password: "5678",  Email: "BigDude@gmail.com",  Birthday: new Date("1985-02-02"),  FavoriteMovies: [],  }
+db.users.insertOne(user2)
+var user2 {  Username: "BigDude",  Password: "5678",  Email: "BigDude@gmail.com",  Birthday: new Date("1985-02-02"),  FavoriteMovies: []  }
+use myFlixDB
+db.users.find().pretty()
+var user2 {  Username: "BigDude",  Password: "5678",  Email: "BigDude@gmail.com",  Birthday: new Date("1985-02-02"),  FavoriteMovies: [],  }
+db.users.insertOne(user2)
+var user2 = {  Username: "BigDude",  Password: "5678",  Email: "BigDude@gmail.com",  Birthday: new Date("1985-02-02"),  FavoriteMovies: [],  }
+db.users.insertOne(user2)
+var user3 = {  Username: "MediumDude",  Password: "91011",  Email: "MediumDude@gmail.com",  Birthday: new Date("1990-03-03"),  FavoriteMovies: [],  }
+db.users.insertOne(user3)
+var user4 = {  Username: "LilDude",  Password: "121314",  Email: "LilDude@gmail.com",  Birthday: new Date("1995-04-04"),  FavoriteMovies: [],  }
+db.users.insertOne(user4)
+var user5 = {  Username: "LittlestDude",  Password: "151617",  Email: "LittlestDude@gmail.com",  Birthday: new Date("2000-05-05"),  FavoriteMovies: [],  }
+db.users.insertOne(user5)
+db.users.find().pretty()
+db.movies.find({"Genre.Name":"Comedy"}).pretty()
+db.users.find().pretty()
+db.movies.find().pretty()
+db.users.update(  {_id: ObjectId("624f2cdb85c50e821ae62500")},  {$push: {FavoriteMovies: [ObjectId("624f1b6485c50e821ae624f7"), ObjectId("624f1fc785c50e821ae624fa")]}}  )
+db.users.find().pretty()
+db.movies.find().pretty
+db.movies.find().pretty()
+db.users.update(  {Username: "BigDude"},  {$push: {FavoriteMovies: [ObjectId("624f1d3385c50e821ae624f8"), ObjectId("624f206785c50e821ae624fb")]}}  )
+db.users.find().pretty()
+db.users.update(  {Username: "MediumDude"},  {$push: {FavoriteMovies: [ObjectId("624f1d3385c50e821ae624f9"), ObjectId("624f206785c50e821ae624fc")]}}  )
+db.movies.find().pretty()
+db.users.update(  {Username: "LilDude"},  {$push: {FavoriteMovies: [ObjectId("624a07457635ae5fa9d968e2"), ObjectId("624f206785c50e821ae624fd")]}}  )
+db.users.update(  {Username: "LittlestDude"},  {$push: {FavoriteMovies: [ObjectId("624f23c985c50e821ae624fe"), ObjectId("624f206785c50e821ae624ff")]}}  )
+db.users.find().pretty()
+use myFlixDB
+db.users.find().pretty()
+show dbs
+use myFlixDB
+db.users.find().pretty()
+use myFlixDB
+use myFlixDB
+use myFlixDB
+run myFlixDB
+mongod
+use myFlixDB
+use myFlixDB
+db.myFlixDB.save()
+db.users.find().pretty()
+use myFlixDB
+db.users.find().pretty()
+db.movies.director.find().pretty()
+show dbs
+use myFlixDB
+db.movies.findOne({"Genre.Name": "Comedy"}).pretty()
+use myFlixDB
+db.users.find().pretty()
+db myFlixDB
+db.users.find().pretty()
+use myFlixDB
+db.users.find().pretty()
+use myFlixDB
+db.users.find().pretty()
+use myFlixDB
+db.movies.find().pretty()
+use myFlixDB\
+use myFlixDB
+db.movies.find().pretty()
